@@ -157,8 +157,35 @@ exports.update = (req, res) => {
      }
 
      //check for fields
-     const {name,description,category} = fields
-     if(!name || !description || !category){
+     const {
+       name,
+       description,
+       category,
+       recipeBy,
+       instruction,
+       instruction1,
+       instruction2,
+       instruction3,
+       instruction4,
+       instruction5,
+       instruction6,
+       instruction7,
+       instruction8,
+       instruction9,
+       instruction10,
+       ingredients,
+       ingredients1,
+       ingredients2,
+       ingredients3,
+       ingredients4,
+       ingredients5,
+       ingredients6,
+       ingredients7,
+       ingredients8,
+       ingredients9,
+       ingredients10,
+     } = fields
+     if(!name){
        return res.status(400).json({
          error:'All fields are required'
        });
@@ -184,7 +211,7 @@ exports.update = (req, res) => {
      recipe.save((err, result)=>{
        if(err){
          return res.status(400).json({
-           error: errorHandler(err)
+           error: 'Photo is required'
          })
        }
 

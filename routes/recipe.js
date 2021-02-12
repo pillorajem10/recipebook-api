@@ -5,7 +5,8 @@ const router = express.Router();
 const {create,
         recipeById,
         read,
-        remove,update,
+        remove,
+        update,
         list,
         listRelated,
         listCategories,
@@ -33,7 +34,6 @@ router.delete(
 router.put(
     "/update/:recipeId/:userId",
     requireSignin,
-    isAuth,
     isAdmin,
     update
 );
