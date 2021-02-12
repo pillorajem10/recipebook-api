@@ -85,7 +85,7 @@ exports.create = (req, res) => {
             ingredients9,
             ingredients10,
           } = fields
-     if(!name){
+     if(!category){
        return res.status(400).json({
          error:'All fields are required'
        });
