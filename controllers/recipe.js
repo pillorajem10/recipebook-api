@@ -3,6 +3,7 @@ const formidable = require ('formidable');
 const { errorHandler } = require('../helpers/dbErrorHandler');
 const _ = require ('lodash');
 const fs = require ('fs');
+const mongoose = require('mongoose');
 
 exports.recipeById = (req,res,next,id)=>{
   Recipe.findById(id).exec((err, recipe)=>{
@@ -236,7 +237,7 @@ exports.list = (req, res) => {
     filterSearchOptions = [{
       $match: {
         $text: { $search: req.query.name },
-        category: req.query.category,
+        category: new mongoose.Types.ObjectId(req.query.category),
       }
     }];
   }
@@ -252,7 +253,7 @@ exports.list = (req, res) => {
   if (req.query.category && !req.query.name) {
     filterSearchOptions = [{
       $match: {
-        category: req.query.category,
+        category: new mongoose.Types.ObjectId(req.query.category),
       }
     }];
   }
