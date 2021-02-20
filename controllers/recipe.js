@@ -230,7 +230,14 @@ exports.list = (req, res) => {
   //for searchKeyword
   // run in mongodb terminal db.createIndex({ name: "text" })
   const searchRegex = new RegExp(req.query.name);
-  const regexSearchOptions = [{ $match: { $text: { $search: req.query.name } } }];
+  const regexSearchOptions = [{
+    $match: {
+      $text: { $search: req.query.name },
+    }
+  }];
+  const withOutSearchOptions = [{
+    $match: { category: req.query.category }
+  }];
   const aggre = req.query.name ? regexSearchOptions : [];
   var aggregateQuery = Recipe.aggregate(aggre);
   // execute recipeList
