@@ -14,7 +14,6 @@ const {create,
         photo,
         photo1,
         reviews,
-        listSearch,
         nopaginatelist
       } = require('../controllers/recipe');
 const { requireSignin, isAuth, isAdmin } = require('../requirements/requirements');
@@ -41,8 +40,6 @@ router.put(
 router.post('/reviews/:id', reviews, requireSignin)
 
 router.get('/', list);
-
-router.get('/search', listSearch);
 
 router.get('/sort', nopaginatelist);
 

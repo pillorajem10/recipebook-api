@@ -274,13 +274,14 @@ exports.list = (req, res) => {
   });
 };
 
+/*
 exports.listSearch = (req, res) => {
     //for pagination
     const { pageIndex, pageSize } = req.query;
     const page = pageIndex;
     const limit = pageSize;
     //for searchKeyword
-    // run in mongodb terminal db.createIndex({ name: "text" })
+    // run in mongodb terminal db.recipes.createIndex({ name: "text" })
     const searchRegex = new RegExp(req.query.name);
     const regexSearchOptions = [{ $match: { $text: { $search: req.query.name } } }];
     const aggre = req.query.name ? regexSearchOptions : [];
@@ -305,6 +306,7 @@ exports.listSearch = (req, res) => {
         });
     }
 };
+*/
 
 //for New recipes and Most popular recipes
 exports.nopaginatelist = (req, res) => {
