@@ -223,23 +223,41 @@ exports.update = (req, res) => {
 
 
 exports.list = (req, res) => {
+  console.log('[LIST] ', req.query, req.body);
+
   //for pagination
   const { pageIndex, pageSize } = req.query;
   const page = pageIndex;
   const limit = pageSize;
-  //for searchKeyword
-  // run in mongodb terminal db.createIndex({ name: "text" })
-  const searchRegex = new RegExp(req.query.name);
-  const regexSearchOptions = [{
-    $match: {
-      $text: { $search: req.query.name },
-    }
-  }];
-  const withOutSearchOptions = [{
-    $match: { category: req.query.category }
-  }];
-  const aggre = req.query.name ? regexSearchOptions : withOutSearchOptions;
-  var aggregateQuery = Recipe.aggregate(aggre);
+
+  let filterSearchOptions = [];
+
+  if (req.query.category && req.query.name) {
+    filterSearchOptions = [{
+      $match: {
+        $text: { $search: req.query.name },
+        category: req.query.category,
+      }
+    }];
+  }
+
+  if (!req.query.category && req.query.name) {
+    filterSearchOptions = [{
+      $match: {
+        $text: { $search: req.query.name },
+      }
+    }];
+  }
+
+  if (req.query.category && !req.query.name) {
+    filterSearchOptions = [{
+      $match: {
+        category: req.query.category,
+      }
+    }];
+  }
+
+  var aggregateQuery = Recipe.aggregate(filterSearchOptions);
   // execute recipeList
   Recipe
   .aggregatePaginate(aggregateQuery,  { page, limit },
