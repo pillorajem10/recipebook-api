@@ -224,8 +224,6 @@ exports.update = (req, res) => {
 
 
 exports.list = (req, res) => {
-  console.log('[LIST] ', req.query, req.body);
-
   //for pagination
   const { pageIndex, pageSize } = req.query;
   const page = pageIndex;
