@@ -238,7 +238,7 @@ exports.list = (req, res) => {
   const withOutSearchOptions = [{
     $match: { category: req.query.category }
   }];
-  const aggre = req.query.name ? regexSearchOptions : [];
+  const aggre = req.query.name ? regexSearchOptions : withOutSearchOptions;
   var aggregateQuery = Recipe.aggregate(aggre);
   // execute recipeList
   Recipe
