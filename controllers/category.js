@@ -1,5 +1,8 @@
 const Category = require('../models/Category');
 const { errorHandler } = require('../helpers/dbErrorHandler');
+const formidable = require ('formidable');
+const _ = require ('lodash');
+const fs = require ('fs');
 
 exports.categoryById = (req,res,next,id)=>{
   Category.findById(id).exec((err,category)=>{
@@ -14,16 +17,62 @@ exports.categoryById = (req,res,next,id)=>{
 }
 
 exports.create = (req, res) => {
-    const category = new Category(req.body);
-    category.save((err, category) => {
-        if (err) {
-            return res.status(400).json({
-                error: errorHandler(err)
-            });
-        }
-        res.json( category );
-    });
+   let form = new formidable.IncomingForm()
+   form.keepExtensions = true
+   form.parse(req, (err, fields, files) => {
+     if(err){
+       return res.status(400).json({
+         error:'Image could not be uploaded'
+       });
+     }
+
+     //check for fields
+     const { name } = fields
+     if(!name){
+       return res.status(400).json({
+         error:'All fields are required'
+       });
+     }
+
+     let category = new Category(fields)
+
+     //1kb is = 1000
+     //1mb is = 1000000
+
+     if(files.photo){
+       //console.log("FILES PHOTO: ", files.photo);
+       if(files.photo.size > 9000000){
+         return res.status(400).json({
+           error:'Image should be less than 9MB size'
+         });
+       }
+       category.photo.data = fs.readFileSync(files.photo.path)
+       category.photo.contentType = files.photo.type
+     }
+
+
+     category.save((err, result)=>{
+       if(err){
+         console.log('ERROR', err)
+         return res.status(400).json({
+           error: errorHandler(err)
+         })
+       }
+
+       res.json(result);
+
+     })
+   });
 };
+
+exports.photo = (req, res, next) => {
+  if(req.category.photo.data){
+    res.set('Content-Type', req.category.photo.contentType)
+    return res.send(req.category.photo.data)
+  }
+  next();
+};
+
 
 exports.read = (req,res) =>{
   return res.json(req.category);
