@@ -40,6 +40,10 @@ connection.once('open', function() {
 })
 
 
+app.get('/', (req, res) => {
+  res.send('レシピブック')
+})
+
 //listener
 app.listen(port, function() {
     console.log(`Server is running on port: ${port}`);
