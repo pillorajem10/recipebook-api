@@ -28,10 +28,10 @@ const category = require('./routes/category');
 const recipe = require('./routes/recipe');
 
 //routes middlewares
-app.use('/auth', auth);
-app.use('/user', user);
-app.use('/category', category);
-app.use('/recipe', recipe);
+app.use('/api/auth', auth);
+app.use('/api/user', user);
+app.use('/api/category', category);
+app.use('/api/recipe', recipe);
 
 //mongoose || mongodb
 mongoose.connect(config.database, { useNewUrlParser: true });
