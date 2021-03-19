@@ -209,6 +209,17 @@ exports.update = (req, res) => {
        recipe.photo.contentType = files.photo.type
      }
 
+     if(files.photo1){
+       //console.log("FILES PHOTO: ", files.photo);
+       if(files.photo1.size > 9000000){
+         return res.status(400).json({
+           error:'Image should be less than 9MB size'
+         });
+       }
+       recipe.photo1.data = fs.readFileSync(files.photo1.path)
+       recipe.photo1.contentType = files.photo1.type
+     }
+
      recipe.save((err, result)=>{
        if(err){
          return res.status(400).json({
