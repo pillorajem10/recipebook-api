@@ -34,7 +34,7 @@ app.use('/api/category', category);
 app.use('/api/recipe', recipe);
 
 //mongoose || mongodb
-mongoose.connect(config.database, { useNewUrlParser: true });
+mongoose.connect(config.database, { useNewUrlParser: true, useUnifiedTopology: true  });
 connection.once('open', function() {
     console.log("connected to database");
 })
