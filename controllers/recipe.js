@@ -99,9 +99,9 @@ exports.create = (req, res) => {
 
      if(files.photo){
        //console.log("FILES PHOTO: ", files.photo);
-       if(files.photo.size > 9000000){
+       if(files.photo.size > 1000000){
          return res.status(400).json({
-           error:'Image should be less than 9MB size'
+           error:'Image should be less than 1MB size'
          });
        }
        recipe.photo.data = fs.readFileSync(files.photo.path)
@@ -110,9 +110,9 @@ exports.create = (req, res) => {
 
      if(files.photo1){
        //console.log("FILES PHOTO: ", files.photo);
-       if(files.photo1.size > 9000000){
+       if(files.photo1.size > 1000000){
          return res.status(400).json({
-           error:'Image should be less than 9MB size'
+           error:'Image should be less than 1MB size'
          });
        }
        recipe.photo1.data = fs.readFileSync(files.photo1.path)
@@ -211,9 +211,9 @@ exports.update = (req, res) => {
 
      if(files.photo1){
        //console.log("FILES PHOTO: ", files.photo);
-       if(files.photo1.size > 9000000){
+       if(files.photo1.size > 1000000){
          return res.status(400).json({
-           error:'Image should be less than 9MB size'
+           error:'Image should be less than 1MB size'
          });
        }
        recipe.photo1.data = fs.readFileSync(files.photo1.path)
