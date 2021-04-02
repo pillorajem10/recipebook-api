@@ -35,229 +35,229 @@ exports.reviews = async (req, res, id) => {
 
     if (review.comment.includes('tite')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('Tite')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('tite')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('Pepe')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('pepe')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('Suso')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('suso')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('Kantot')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('kantot')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('Kantutan')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('kantutan')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('Puta')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('puta')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('Gago')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('gago')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('Eut')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('eut')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('Iyot')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('iyot')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('Tanginamo')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('tanginamo')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('Tangina')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('tangina')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('Tarantado')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('tarantado')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('Pakyu')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('pakyu')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('Fuck')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('fuck')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('Motherfucker')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('motherfucker')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('Putangina')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('putangina')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('Putanginamo')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('putanginamo')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('Bobo')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('bobo')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('Tanga')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('tanga')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('Kupal')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('kupal')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('Puke')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('puke')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('Puki')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('puki')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('Bilat')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('bilat')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('Kipay')) {
 
     } else if (review.comment.includes('kipay')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('Tit3')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('tit3')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('G@go')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('g@go')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('T@nginamo')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('T@ngina mo')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('P@kyu')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.includes('p@kyu')) {
       return res.status(400).json({
-        error:'Inappropriate comment'
+        error:'Your comment is inappropriate'
       });
     } else if (review.comment.length > 300) {
       return res.status(400).json({
