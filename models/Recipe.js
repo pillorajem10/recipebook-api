@@ -79,6 +79,66 @@ const RecipeSchema = new mongoose.Schema(
             type: String,
             maxlength: 2000
         },
+        ingredients11: {
+            type: String,
+            maxlength: 2000
+        },
+        ingredients12: {
+            type: String,
+            maxlength: 2000
+        },
+        ingredients13: {
+            type: String,
+            maxlength: 2000
+        },
+        ingredients14: {
+            type: String,
+            maxlength: 2000
+        },
+        ingredients15: {
+            type: String,
+            maxlength: 2000
+        },
+        ingredients16: {
+            type: String,
+            maxlength: 2000
+        },
+        ingredients17: {
+            type: String,
+            maxlength: 2000
+        },
+        ingredients18: {
+            type: String,
+            maxlength: 2000
+        },
+        ingredients19: {
+            type: String,
+            maxlength: 2000
+        },
+        ingredients20: {
+            type: String,
+            maxlength: 2000
+        },
+        ingredients21: {
+            type: String,
+            maxlength: 2000
+        },
+        ingredients22: {
+            type: String,
+            maxlength: 2000
+        },
+        ingredients23: {
+            type: String,
+            maxlength: 2000
+        },
+        ingredients24: {
+            type: String,
+            maxlength: 2000
+        },
+        ingredients25: {
+            type: String,
+            maxlength: 2000
+        },
         instruction: {
             type: String,
             required: true,
@@ -121,6 +181,66 @@ const RecipeSchema = new mongoose.Schema(
             maxlength: 2000
         },
         instruction10: {
+            type: String,
+            maxlength: 2000
+        },
+        instruction11: {
+            type: String,
+            maxlength: 2000
+        },
+        instruction12: {
+            type: String,
+            maxlength: 2000
+        },
+        instruction13: {
+            type: String,
+            maxlength: 2000
+        },
+        instruction14: {
+            type: String,
+            maxlength: 2000
+        },
+        instruction15: {
+            type: String,
+            maxlength: 2000
+        },
+        instruction16: {
+            type: String,
+            maxlength: 2000
+        },
+        instruction17: {
+            type: String,
+            maxlength: 2000
+        },
+        instruction18: {
+            type: String,
+            maxlength: 2000
+        },
+        instruction19: {
+            type: String,
+            maxlength: 2000
+        },
+        instruction20: {
+            type: String,
+            maxlength: 2000
+        },
+        instruction21: {
+            type: String,
+            maxlength: 2000
+        },
+        instruction22: {
+            type: String,
+            maxlength: 2000
+        },
+        instruction23: {
+            type: String,
+            maxlength: 2000
+        },
+        instruction24: {
+            type: String,
+            maxlength: 2000
+        },
+        instruction25: {
             type: String,
             maxlength: 2000
         },
