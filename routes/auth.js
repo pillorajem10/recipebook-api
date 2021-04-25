@@ -21,7 +21,7 @@ router.post('/signup',userSignupValidator, function (req, res) {
       user.salt = undefined;
       user.hashed_password = undefined;
       res.json({
-         token, _id, email, name, role  
+         token, _id, email, name, role
       });
     });
 });

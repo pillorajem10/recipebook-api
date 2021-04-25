@@ -11,7 +11,7 @@ exports.userSignupValidator = (req, res, next) => {
     req.check('password', 'Password is required').notEmpty();
     req.check('password')
         .isLength({ min: 8, max: 32 })
-        .withMessage('email', 'Email must be between 8 to 32 characters')
+        .withMessage('Password must be between 8 to 32 characters')
         .matches(/^(?=.*\d)(?=.*[a-z])[a-zA-Z\d@$.!%*#?&]/)
         .withMessage('Password must contain a number and letter');
     req.checkBody('password2','Password and Confirm password didnt match.').equals(req.body.password);
