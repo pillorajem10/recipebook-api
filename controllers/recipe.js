@@ -526,55 +526,51 @@ exports.update = (req, res) => {
    });
 };
 
+exports.list = async (req, res) => {
+  try {
+    const { pageIndex, pageSize, category, name } = req.query;
+    const page = parseInt(pageIndex, 10) || 1;
+    const limit = parseInt(pageSize, 10) || 10;
 
-exports.list = (req, res) => {
-  //for pagination
-  const { pageIndex, pageSize } = req.query;
-  const page = pageIndex;
-  const limit = pageSize;
+    let filterSearchOptions = [];
 
-  let filterSearchOptions = [];
-
-  if (req.query.category && req.query.name) {
-    filterSearchOptions = [{
-      $match: {
-        $text: { $search: req.query.name },
-        category: new mongoose.Types.ObjectId(req.query.category),
-      }
-    }];
-  }
-
-  if (!req.query.category && req.query.name) {
-    filterSearchOptions = [{
-      $match: {
-        $text: { $search: req.query.name },
-      }
-    }];
-  }
-
-  if (req.query.category && !req.query.name) {
-    filterSearchOptions = [{
-      $match: {
-        category: new mongoose.Types.ObjectId(req.query.category),
-      }
-    }];
-  }
-
-  var aggregateQuery = Recipe.aggregate(filterSearchOptions);
-  // execute recipeList
-  Recipe
-  .aggregatePaginate(aggregateQuery,  { page, limit },
-  (
-    err,
-    result
-  ) => {
-    if (err) {
-      console.err(err);
-    } else {
-      res.json(result)
+    if (category) {
+      filterSearchOptions.push({
+        $match: {
+          category: new mongoose.Types.ObjectId(category),
+        },
+      });
     }
-  });
+
+    if (name) {
+      filterSearchOptions.push({
+        $match: {
+          $text: { $search: name },
+        },
+      });
+    }
+
+    const aggregateQuery = Recipe.aggregate(filterSearchOptions);
+
+    const options = {
+      page,
+      limit,
+    };
+
+    Recipe.aggregatePaginate(aggregateQuery, options, (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'An error occurred while fetching recipes.' });
+      }
+
+      res.json(result);
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An internal server error occurred.' });
+  }
 };
+
 
 /*
 exports.listSearch = (req, res) => {

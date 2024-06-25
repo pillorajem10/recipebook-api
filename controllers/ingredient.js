@@ -16,57 +16,6 @@ exports.ingredientById = (req,res,next,id)=>{
   })
 }
 
-/*
-exports.create = (req, res) => {
-   let form = new formidable.IncomingForm()
-   form.keepExtensions = true
-   form.parse(req, (err, fields, files) => {
-     if(err){
-       return res.status(400).json({
-         error:'Image could not be uploaded'
-       });
-     }
-
-     //check for fields
-     const { name } = fields
-     if(!name){
-       return res.status(400).json({
-         error:'All fields are required'
-       });
-     }
-
-     let ingredient = new Ingredient(fields)
-
-     //1kb is = 1000
-     //1mb is = 1000000
-
-     if(files.photo){
-       //console.log("FILES PHOTO: ", files.photo);
-       if(files.photo.size > 9000000){
-         return res.status(400).json({
-           error:'Image should be less than 9MB size'
-         });
-       }
-       ingredient.photo.data = fs.readFileSync(files.photo.path)
-       ingredient.photo.contentType = files.photo.type
-     }
-
-
-     ingredient.save((err, result)=>{
-       if(err){
-         console.log('ERROR', err)
-         return res.status(400).json({
-           error: errorHandler(err)
-         })
-       }
-
-       res.json(result);
-
-     })
-   });
-};
-*/
-
 exports.create = (req, res) => {  
     Ingredient.create(req.body, function (err, cat) {
         console.log('REQQQQQQQQQQQQQQQQ', req.body)
@@ -131,4 +80,42 @@ exports.list = (req,res) => {
     }
     res.json(data);
   });
+};
+
+
+exports.listWithPaginate = async (req, res) => {
+  try {
+    const { pageIndex, pageSize, name } = req.query;
+    const page = parseInt(pageIndex, 10) || 1;
+    const limit = parseInt(pageSize, 10) || 10;
+
+    let filterSearchOptions = [];
+
+    if (name) {
+      filterSearchOptions.push({
+        $match: {
+          $text: { $search: name },
+        },
+      });
+    }
+
+    const aggregateQuery = Ingredient.aggregate(filterSearchOptions);
+
+    const options = {
+      page,
+      limit,
+    };
+
+    Ingredient.aggregatePaginate(aggregateQuery, options, (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'An error occurred while fetching recipes.' });
+      }
+
+      res.json(result);
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An internal server error occurred.' });
+  }
 };
