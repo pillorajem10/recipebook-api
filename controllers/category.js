@@ -115,3 +115,41 @@ exports.list = (req,res) => {
     res.json(data);
   });
 };
+
+
+exports.listWithPaginate = async (req, res) => {
+  try {
+    const { pageIndex, pageSize, name } = req.query;
+    const page = parseInt(pageIndex, 10) || 1;
+    const limit = parseInt(pageSize, 10) || 10;
+
+    let filterSearchOptions = [];
+
+    if (name) {
+      filterSearchOptions.push({
+        $match: {
+          $text: { $search: name },
+        },
+      });
+    }
+
+    const aggregateQuery = Category.aggregate(filterSearchOptions);
+
+    const options = {
+      page,
+      limit,
+    };
+
+    Category.aggregatePaginate(aggregateQuery, options, (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'An error occurred while fetching recipes.' });
+      }
+
+      res.json(result);
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An internal server error occurred.' });
+  }
+};
