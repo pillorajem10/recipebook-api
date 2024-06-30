@@ -22,7 +22,7 @@ const { userById } = require('../controllers/user');
 router.post('/create/:userId', requireSignin,isAuth,isAdmin,create);
 
 router.get('/get/:recipeId', read)
-
+    
 router.delete(
     "/delete/:recipeId/:userId",
     requireSignin,

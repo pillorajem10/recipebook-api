@@ -280,18 +280,153 @@ exports.reviews = async (req, res, id) => {
   }
 }
 
-exports.create = (req, res) => {
-   let form = new formidable.IncomingForm()
-   form.keepExtensions = true
-   form.parse(req, (err, fields, files)=>{
-     if(err){
-       return res.status(400).json({
-         error:'Image could not be uploaded'
-       });
-     }
 
-     //check for fields
-     const {
+exports.create = (req, res) => {
+  let form = new formidable.IncomingForm();
+  form.keepExtensions = true;
+  form.parse(req, (err, fields, files) => {
+      if (err) {
+          return res.status(400).json({
+              error: 'Image could not be uploaded'
+          });
+      }
+
+      // Destructure fields from the request
+      const {
+          name,
+          description,
+          category,
+          recipeBy,
+          instruction,
+          instruction1,
+          instruction2,
+          instruction3,
+          instruction4,
+          instruction5,
+          instruction6,
+          instruction7,
+          instruction8,
+          instruction9,
+          instruction10,
+          instruction11,
+          instruction12,
+          instruction13,
+          instruction14,
+          instruction15,
+          instruction16,
+          instruction17,
+          instruction18,
+          instruction19,
+          instruction20,
+          instruction21,
+          instruction22,
+          instruction23,
+          instruction24,
+          instruction25,
+          ingredients,
+          ingredients1,
+          ingredients2,
+          ingredients3,
+          ingredients4,
+          ingredients5,
+          ingredients6,
+          ingredients7,
+          ingredients8,
+          ingredients9,
+          ingredients10,
+          ingredients11,
+          ingredients12,
+          ingredients13,
+          ingredients14,
+          ingredients15,
+          ingredients16,
+          ingredients17,
+          ingredients18,
+          ingredients19,
+          ingredients20,
+          ingredients21,
+          ingredients22,
+          ingredients23,
+          ingredients24,
+          ingredients25
+      } = fields;
+
+      console.log('FIELDSSSSSSSSSSSSSSSSSS', fields)
+
+      // Check for required fields
+      if (!name || !description || !category || !recipeBy || !ingredients || !instruction) {
+          return res.status(400).json({
+              error: 'All required fields must be filled'
+          });
+      }
+
+      let recipe = new Recipe(fields);
+
+      // Handle photo uploads
+      if (files.photo) {
+          if (files.photo.size > 1000000) {
+              return res.status(400).json({
+                  error: 'Image should be less than 1MB in size'
+              });
+          }
+          recipe.photo.data = fs.readFileSync(files.photo.path);
+          recipe.photo.contentType = files.photo.type;
+      }
+
+      if (files.photo1) {
+          if (files.photo1.size > 1000000) {
+              return res.status(400).json({
+                  error: 'Image should be less than 1MB in size'
+              });
+          }
+          recipe.photo1.data = fs.readFileSync(files.photo1.path);
+          recipe.photo1.contentType = files.photo1.type;
+      }
+
+      // Handle multiple category IDs
+      if (typeof category === 'string') {
+          recipe.category = category.split(',').map(id => id.trim());
+      }
+
+      recipe.save((err, result) => {
+          if (err) {
+              return res.status(400).json({
+                  error: errorHandler(err)
+              });
+          }
+          res.json(result);
+      });
+  });
+};
+
+
+
+exports.remove = (req,res) => {
+  let recipe = req.recipe;
+  Recipe.findByIdAndRemove(recipe, function(err, deletedRecipe){
+    if(err){
+      return res.status(400).json({
+        error: errorHandler(err)
+      });
+    }
+    res.json({
+      message:"recipe deleted"
+    });
+  });
+};
+
+exports.update = (req, res) => {
+    let form = new formidable.IncomingForm();
+    form.keepExtensions = true;
+    form.parse(req, (err, fields, files) => {
+        if (err) {
+            return res.status(400).json({
+                error: 'Image could not be uploaded'
+            });
+        }
+
+        // Destructure fields from the request
+        const {
             name,
             description,
             category,
@@ -348,183 +483,55 @@ exports.create = (req, res) => {
             ingredients23,
             ingredients24,
             ingredients25
-          } = fields
-     if(!category){
-       return res.status(400).json({
-         error:'All fields are required'
-       });
-     }
+        } = fields;
 
-     let recipe = new Recipe(fields)
+        // Check for required fields
+        if (!name || !description || !category || !recipeBy || !ingredients || !instruction) {
+            return res.status(400).json({
+                error: 'All required fields must be filled'
+            });
+        }
 
-     //1kb is = 1000
-     //1mb is = 1000000
+        let recipe = req.recipe;
+        recipe = _.extend(recipe, fields);
 
-     if(files.photo){
-       //console.log("FILES PHOTO: ", files.photo);
-       if(files.photo.size > 1000000){
-         return res.status(400).json({
-           error:'Image should be less than 1MB size'
-         });
-       }
-       recipe.photo.data = fs.readFileSync(files.photo.path)
-       recipe.photo.contentType = files.photo.type
-     }
+        // Handle photo uploads
+        if (files.photo) {
+            if (files.photo.size > 1000000) {
+                return res.status(400).json({
+                    error: 'Image should be less than 1MB in size'
+                });
+            }
+            recipe.photo.data = fs.readFileSync(files.photo.path);
+            recipe.photo.contentType = files.photo.type;
+        }
 
-     if(files.photo1){
-       //console.log("FILES PHOTO: ", files.photo);
-       if(files.photo1.size > 1000000){
-         return res.status(400).json({
-           error:'Image should be less than 1MB size'
-         });
-       }
-       recipe.photo1.data = fs.readFileSync(files.photo1.path)
-       recipe.photo1.contentType = files.photo1.type
-     }
+        if (files.photo1) {
+            if (files.photo1.size > 1000000) {
+                return res.status(400).json({
+                    error: 'Image should be less than 1MB in size'
+                });
+            }
+            recipe.photo1.data = fs.readFileSync(files.photo1.path);
+            recipe.photo1.contentType = files.photo1.type;
+        }
 
-     recipe.save((err, result)=>{
-       if(err){
-         console.log('ERROR', err)
-         return res.status(400).json({
-           error: errorHandler(err)
-         })
-       }
+        // Handle multiple category IDs
+        if (typeof category === 'string') {
+            recipe.category = category.split(',').map(id => id.trim());
+        }
 
-       res.json(result);
-
-     })
-   });
-};
-
-exports.remove = (req,res) => {
-  let recipe = req.recipe;
-  Recipe.findByIdAndRemove(recipe, function(err, deletedRecipe){
-    if(err){
-      return res.status(400).json({
-        error: errorHandler(err)
-      });
-    }
-    res.json({
-      message:"recipe deleted"
+        recipe.save((err, result) => {
+            if (err) {
+                return res.status(400).json({
+                    error: errorHandler(err)
+                });
+            }
+            res.json(result);
+        });
     });
-  });
 };
 
-exports.update = (req, res) => {
-   let form = new formidable.IncomingForm()
-   form.keepExtensions = true
-   form.parse(req, (err, fields, files)=>{
-     if(err){
-       return res.status(400).json({
-         error:'Image could not be uploaded'
-       });
-     }
-
-     //check for fields
-     const {
-       name,
-       description,
-       category,
-       recipeBy,
-       instruction,
-       instruction1,
-       instruction2,
-       instruction3,
-       instruction4,
-       instruction5,
-       instruction6,
-       instruction7,
-       instruction8,
-       instruction9,
-       instruction10,
-       instruction11,
-       instruction12,
-       instruction13,
-       instruction14,
-       instruction15,
-       instruction16,
-       instruction17,
-       instruction18,
-       instruction19,
-       instruction20,
-       instruction21,
-       instruction22,
-       instruction23,
-       instruction24,
-       instruction25,
-       ingredients,
-       ingredients1,
-       ingredients2,
-       ingredients3,
-       ingredients4,
-       ingredients5,
-       ingredients6,
-       ingredients7,
-       ingredients8,
-       ingredients9,
-       ingredients10,
-       ingredients11,
-       ingredients12,
-       ingredients13,
-       ingredients14,
-       ingredients15,
-       ingredients16,
-       ingredients17,
-       ingredients18,
-       ingredients19,
-       ingredients20,
-       ingredients21,
-       ingredients22,
-       ingredients23,
-       ingredients24,
-       ingredients25
-     } = fields
-     if(!name){
-       return res.status(400).json({
-         error:'All fields are required'
-       });
-     }
-
-     let recipe = req.recipe
-     recipe =_.extend(recipe,fields)
-
-     //1kb is = 1000
-     //1mb is = 1000000
-
-     if(files.photo){
-       //console.log("FILES PHOTO: ", files.photo);
-       if(files.photo.size > 1000000){
-         return res.status(400).json({
-           error:'Image should be less than 1MB size'
-         });
-       }
-       recipe.photo.data = fs.readFileSync(files.photo.path)
-       recipe.photo.contentType = files.photo.type
-     }
-
-     if(files.photo1){
-       //console.log("FILES PHOTO: ", files.photo);
-       if(files.photo1.size > 1000000){
-         return res.status(400).json({
-           error:'Image should be less than 1MB size'
-         });
-       }
-       recipe.photo1.data = fs.readFileSync(files.photo1.path)
-       recipe.photo1.contentType = files.photo1.type
-     }
-
-     recipe.save((err, result)=>{
-       if(err){
-         return res.status(400).json({
-           error: 'Photo is required'
-         })
-       }
-
-       res.json(result);
-
-     })
-   });
-};
 
 exports.list = async (req, res) => {
   try {

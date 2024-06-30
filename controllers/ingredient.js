@@ -46,6 +46,7 @@ exports.read = (req,res) =>{
 exports.update = (req,res) => {
   const ingredient = req.ingredient
   ingredient.name = req.body.name
+  ingredient.measurementCosting = req.body.measurementCosting
   ingredient.price = req.body.price
   ingredient.save((err, data)=>{
     if(err){

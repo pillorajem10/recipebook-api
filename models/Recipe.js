@@ -139,6 +139,111 @@ const RecipeSchema = new mongoose.Schema(
             type: String,
             maxlength: 2000
         },
+        measurement: {
+            type: String,
+            required: true,
+            default: ''
+        },
+        measurement1: {
+            type: String,
+            default: ''
+        },
+        measurement2: {
+            type: String,
+            default: ''
+        },
+        measurement3: {
+            type: String,
+            default: ''
+        },
+        measurement4: {
+            type: String,
+            default: ''
+        },
+        measurement5: {
+            type: String,
+            default: ''
+        },
+        measurement6: {
+            type: String,
+            default: ''
+        },
+        measurement7: {
+            type: String,
+            default: ''
+        },
+        measurement8: {
+            type: String,
+            default: ''
+        },
+        measurement9: {
+            type: String,
+            default: ''
+        },
+        measurement10: {
+            type: String,
+            default: ''
+        },
+        measurement11: {
+            type: String,
+            default: ''
+        },
+        measurement12: {
+            type: String,
+            default: ''
+        },
+        measurement13: {
+            type: String,
+            default: ''
+        },
+        measurement14: {
+            type: String,
+            default: ''
+        },
+        measurement15: {
+            type: String,
+            default: ''
+        },
+        measurement16: {
+            type: String,
+            default: ''
+        },
+        measurement17: {
+            type: String,
+            default: ''
+        },
+        measurement18: {
+            type: String,
+            default: ''
+        },
+        measurement19: {
+            type: String,
+            default: ''
+        },
+        measurement20: {
+            type: String,
+            default: ''
+        },
+        measurement21: {
+            type: String,
+            default: ''
+        },
+        measurement22: {
+            type: String,
+            default: ''
+        },
+        measurement23: {
+            type: String,
+            default: ''
+        },
+        measurement24: {
+            type: String,
+            default: ''
+        },
+        measurement25: {
+            type: String,
+            default: ''
+        },        
         instruction: {
             type: String,
             required: true,
@@ -244,11 +349,11 @@ const RecipeSchema = new mongoose.Schema(
             type: String,
             maxlength: 2000
         },
-        category: {
+        category: [{
             type: ObjectId,
             ref: "Category",
             required: true
-        },
+        }],
         reviews: [ CommentSchema ],
         rating: { type: Number,
           default: 0,
