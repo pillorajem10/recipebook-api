@@ -78,6 +78,7 @@ exports.read = (req,res) =>{
   return res.json(req.category);
 };
 
+/*
 exports.update = (req,res) => {
   const category = req.category
   category.name = req.body.name
@@ -90,6 +91,42 @@ exports.update = (req,res) => {
     res.json(data);
   })
 }
+*/
+
+exports.update = (req, res) => {
+  let form = new formidable.IncomingForm();
+  form.keepExtensions = true;
+  form.parse(req, (err, fields, files) => {
+    if (err) {
+      return res.status(400).json({
+        error: 'Image could not be uploaded'
+      });
+    }
+
+    let category = req.category;
+    category = _.extend(category, fields);
+
+    if (files.photo) {
+      if (files.photo.size > 1000000) {
+        return res.status(400).json({
+          error: 'Image should be less than 1MB in size'
+        });
+      }
+      category.photo.data = fs.readFileSync(files.photo.path);
+      category.photo.contentType = files.photo.type;
+    }
+
+    category.save((err, result) => {
+      if (err) {
+        console.log('ERROR UPDATING CATEGORYYYY', err);
+        return res.status(400).json({
+          error: errorHandler(err)
+        });
+      }
+      res.json(result);
+    });
+  });
+};
 
 exports.remove = (req,res) => {
   const category = req.category
