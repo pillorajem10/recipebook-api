@@ -373,6 +373,7 @@ exports.create = (req, res) => {
           recipe.photo.contentType = files.photo.type;
       }
 
+      /*
       if (files.photo1) {
           if (files.photo1.size > 1000000) {
               return res.status(400).json({
@@ -382,6 +383,7 @@ exports.create = (req, res) => {
           recipe.photo1.data = fs.readFileSync(files.photo1.path);
           recipe.photo1.contentType = files.photo1.type;
       }
+      */
 
       // Handle multiple category IDs
       if (typeof category === 'string') {
@@ -453,6 +455,7 @@ exports.update = (req, res) => {
       recipe.photo.contentType = files.photo.type;
     }
 
+    /*
     if (files.photo1) {
       if (files.photo1.size > 1000000) {
         return res.status(400).json({
@@ -462,6 +465,7 @@ exports.update = (req, res) => {
       recipe.photo1.data = fs.readFileSync(files.photo1.path);
       recipe.photo1.contentType = files.photo1.type;
     }
+    */
 
     if (typeof category === 'string') {
       recipe.category = category.split(',').map(id => id.trim());
